@@ -6,8 +6,7 @@ namespace structures {
     Weapon generateWeapon(int level) {
         Weapon current;
 
-        // Losowanie typu bronii (uwaga: rand() % 5 zwraca 0..4, a Ty masz tylko 3 typy)
-        int typeNum = rand() % 3;  // poprawka z 5 na 3
+        int typeNum = rand() % 3;
         current.type = static_cast<WeaponType>(typeNum);
 
         int maxStat = level * 5;

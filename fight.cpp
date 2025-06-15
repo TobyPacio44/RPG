@@ -5,21 +5,18 @@
 
 namespace structures {
 
-	// Oblicz modyfikowane obra¿enia z losow¹ wariacj¹ ±20%
 	int calculateModifiedDamage(int baseDamage) {
 		float variation = 0.8f + static_cast<float>(rand() % 41) / 100.0f; // 0.80 - 1.20
 		return static_cast<int>(baseDamage * variation);
 	}
 
-	// Czy trafienie siê powiod³o
 	bool checkHit(float hitChance) {
 		float roll = static_cast<float>(rand()) / RAND_MAX; // 0.0 - 1.0
 		return roll <= hitChance;
 	}
 
-	// Czy trafienie krytyczne
 	bool checkCrit() {
-		int chance = rand() % 100; // 0 - 99
+		int chance = rand() % 100;
 		return chance < 10; // 10% na krytyka
 	}
 
@@ -53,7 +50,7 @@ namespace structures {
 			return true;
 		}
 
-		Sleep(2000); // 1 sekunda przerwy
+		Sleep(2000);
 
 		// Atak przeciwnika
 		int damage = calculateModifiedDamage(enemy.baseDamage);
@@ -65,7 +62,7 @@ namespace structures {
 			return true;
 		}
 
-		Sleep(2000); // 1 sekunda przerwy
+		Sleep(2000);
 
 		return false;
 	}
