@@ -5,19 +5,10 @@ namespace structures {
 
     Armor generateArmor(int level) {
         Armor current;
-        int num;
+        int base = level * 5;
 
-        num = rand() % (level * 5) + 1;
-        current.armor = num;
-
-        num = rand() % (level * 5) + 1;
-        current.durability = num;
-
-        num = rand() % (level * 5) + 1;
-        current.fireDurability = num;
-
-        num = rand() % (level * 5) + 1;
-        current.iceDurability = num;
+        current.armor = (rand() % (base / 2)) + base / 2; // 50–100% z base
+        current.durability = (rand() % 21) + 80; // 80–100%
 
         return current;
     }

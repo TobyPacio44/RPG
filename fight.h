@@ -4,6 +4,6 @@
 
 namespace structures {
 
-    bool fightRound(Character& character, Enemy& enemy);
+    bool fightRound(Character* character, Enemy* enemy);
 
 }

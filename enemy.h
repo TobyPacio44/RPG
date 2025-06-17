@@ -11,7 +11,7 @@ namespace structures {
             enemy.name = Name;
             enemy.health = 50 + rand() % (level * 10);
             enemy.baseArmor = rand() % (level * 3) + 2;
-            enemy.baseDamage = rand() % (level * 4) + 2;
+            enemy.baseDamage = rand() % (level * 5) + 4;
             enemy.mana = 10;
             return enemy;
         }

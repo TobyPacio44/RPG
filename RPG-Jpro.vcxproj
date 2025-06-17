@@ -129,7 +129,9 @@
   <ItemGroup>
     <ClCompile Include="armor.cpp" />
     <ClCompile Include="fight.cpp" />
+    <ClCompile Include="inventory.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="map.cpp" />
     <ClCompile Include="weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +140,12 @@
     <ClInclude Include="enemy.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="fight.h" />
+    <ClInclude Include="inventory.h" />
+    <ClInclude Include="inventory_menu.h" />
+    <ClInclude Include="item.h" />
+    <ClInclude Include="item_generator.h" />
+    <ClInclude Include="item_utils.h" />
+    <ClInclude Include="map.h" />
     <ClInclude Include="weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
