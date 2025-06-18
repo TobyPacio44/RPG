@@ -52,7 +52,7 @@ void structures::Map::movePlayer(char direction) {
             playerMoveCounter++;
         }
         else {
-            std::cout << "Nie mozesz wejsc na przeszkode!\n";
+            std::cout << "\nNie mozesz wejsc na przeszkode!\n";
             Sleep(500); // by gracz zobaczy³ komunikat
         }
 
@@ -61,7 +61,7 @@ void structures::Map::movePlayer(char direction) {
         }
     }
     else {
-        std::cout << "Nie mozesz wyjsc poza mape!\n";
+        std::cout << "\nNie mozesz wyjsc poza mape!\n";
         Sleep(500);
     }
 

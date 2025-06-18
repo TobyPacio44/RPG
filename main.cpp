@@ -17,7 +17,7 @@ using namespace structures;
 int main() {
     srand(time(nullptr));
 
-    int floor = 5;
+    int floor = 1;
 
     Character* character = new Character(Character::generateCharacter("Hero", floor));
     character->inventory.tryAddItem(generatePotion(floor), 0, 0);
@@ -63,7 +63,7 @@ int main() {
         if (map.playerX == 8 && map.playerY == 8) {
             if (floor < 5) {
                 floor++;
-                std::cout << "Loading next level: " << floor << "...\n";
+                std::cout << "\nLoading next level: " << floor << "...\n";
                 Sleep(1500);
 
                 map = Map(); // nowa mapa

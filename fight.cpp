@@ -60,7 +60,7 @@ namespace structures {
             return true;
         }
 
-        Sleep(4000);
+        Sleep(1000);
 
         return false;
     }
@@ -81,5 +81,6 @@ namespace structures {
             int extra = calculateModifiedDamage(enemy->baseDamage / 2);
             player->takeDamage(extra);
         }
+        Sleep(1000);
     }
 }
