@@ -21,7 +21,7 @@ namespace structures {
 	private:
 		int width;
 		int height;
-		Item* grid[10][10];
+		std::vector<std::vector<Item*>> grid;
 		bool canPlace(Item* item, int x, int y) const;
 	};
 

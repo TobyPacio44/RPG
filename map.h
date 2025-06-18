@@ -10,10 +10,12 @@ namespace structures {
 
         int playerX;
         int playerY;
+        int playerMoveCounter = 0;
 
         void print(int x) const;
         void placePlayer(int x, int y);
         void movePlayer(char direction);
+        void moveEnemies();
 
         void spawnEnemy(int x, int y);
         void spawnItem(int x, int y);

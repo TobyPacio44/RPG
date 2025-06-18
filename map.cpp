@@ -42,17 +42,22 @@ void structures::Map::movePlayer(char direction) {
     case 'A': case 'a': newX--; break;
     case 'D': case 'd': newX++; break;
     default:
-        std::cout << "Nieprawidlowy ruch!\n";
+        //std::cout << "Nieprawidlowy ruch!\n";
         return;
     }
 
     if (newX >= 0 && newX < width && newY >= 0 && newY < height) {
         if (grid[newY][newX] != '#') {
             placePlayer(newX, newY);
+            playerMoveCounter++;
         }
         else {
             std::cout << "Nie mozesz wejsc na przeszkode!\n";
             Sleep(500); // by gracz zobaczy³ komunikat
+        }
+
+        if (playerMoveCounter % 3 == 0) {
+            moveEnemies();
         }
     }
     else {
@@ -71,6 +76,42 @@ void structures::Map::spawnEnemy(int x, int y) {
         }
     }
 }
+
+void structures::Map::moveEnemies() {
+    std::vector<std::pair<int, int>> enemies;
+
+    // ZnajdŸ wszystkich wrogów
+    for (int y = 0; y < height; ++y) {
+        for (int x = 0; x < width; ++x) {
+            if (grid[y][x] == 'E') {
+                enemies.push_back({x, y});
+            }
+        }
+    }
+
+    // Przesuñ ka¿dego losowo
+    for (const auto& pair : enemies) {
+        int x = pair.first;
+        int y = pair.second;
+        int dx = 0, dy = 0;
+        int dir = rand() % 4;
+        if (dir == 0) dx = -1;
+        else if (dir == 1) dx = 1;
+        else if (dir == 2) dy = -1;
+        else dy = 1;
+
+        int newX = x + dx;
+        int newY = y + dy;
+
+        // Sprawdzenie granic i przeszkód
+        if (newX >= 0 && newX < width && newY >= 0 && newY < height &&
+            grid[newY][newX] == '.') {
+            grid[y][x] = '.';
+            grid[newY][newX] = 'E';
+        }
+    }
+}
+
 
 void structures::Map::spawnItem(int x, int y) {
     if (x >= 0 && x < width && y >= 0 && y < height && grid[y][x] == '.') {

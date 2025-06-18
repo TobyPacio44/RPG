@@ -13,7 +13,6 @@ namespace structures {
         int posy = 0;
 
         virtual void takeDamage(int damage) {
-            damage -= baseArmor;
             if (damage > 0) {
                 health -= damage;
             }

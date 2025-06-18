@@ -21,7 +21,7 @@ namespace structures {
         return (rand() % 100) < 10;
     }
 
-    bool fightRound(Character* player, Enemy* enemy) {
+    bool fightRound(Character* player, Enemy* enemy, void (*enemyAttackFn)(Enemy*, Character*)) {
         system("cls");
 
         std::cout << "=== Walka ===\n";
@@ -48,22 +48,38 @@ namespace structures {
             return true;
         }
 
-        Sleep(2000);
+        Sleep(1000);
 
-        // Atak przeciwnika
+        //Atak przeciwnika
+        std::cout <<"\n";
         std::cout << enemy->name << " atakuje...\n";
-        int damage = calculateModifiedDamage(enemy->baseDamage);
-        //std::cout << enemy->name << " trafia za " << damage << " obrazen.\n";
-        player->takeDamage(damage);
+        enemyAttackFn(enemy, player);
 
         if (player->health <= 0) {
             std::cout << player->name << " zostal pokonany!\n";
             return true;
         }
 
-        Sleep(2000);
+        Sleep(4000);
 
         return false;
     }
 
+    void regularEnemyAttack(Enemy* enemy, Character* player) {
+        int damage = calculateModifiedDamage(enemy->baseDamage);
+        player->takeDamage(damage);
+    }
+
+    void bossEnemyAttack(Enemy* enemy, Character* player) {
+        int damage = calculateModifiedDamage(enemy->baseDamage + 5); // silniejszy
+        std::cout << "\n[Boss] zadaje potezny cios!\n";
+        player->takeDamage(damage);
+
+        // Bonusowy atak (np. 20% szans)
+        if ((rand() % 100) < 20) {
+            std::cout << "\n[Boss] wykonuje dodatkowy atak!\n";
+            int extra = calculateModifiedDamage(enemy->baseDamage / 2);
+            player->takeDamage(extra);
+        }
+    }
 }

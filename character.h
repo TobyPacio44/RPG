@@ -20,7 +20,7 @@ namespace structures {
             if (roll <= weapon.hitChance) {
                 int totalDamage = baseDamage + weapon.attack;
                 enemy.takeDamage(totalDamage);
-                std::cout << name << " hits for " << totalDamage << " damage!\n";
+                //std::cout << name << " hits for " << totalDamage << " damage!\n";
             }
             else {
                 std::cout << name << " missed the attack!\n";

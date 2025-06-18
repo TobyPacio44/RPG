@@ -4,9 +4,7 @@
 namespace structures {
 
 	Inventory::Inventory(int w, int h) : width(w), height(h) {
-		for (int y = 0; y < 10; ++y)
-			for (int x = 0; x < 10; ++x)
-				grid[y][x] = nullptr;
+		grid.resize(height, std::vector<Item*>(width, nullptr));
 	}
 
 	bool Inventory::canPlace(Item* item, int x, int y) const {
