@@ -10,6 +10,7 @@ namespace structures {
 	}
 
 	bool Inventory::canPlace(Item* item, int x, int y) const {
+		// Sprawdza, czy item zmieœci siê w danym miejscu siatki
 		if (x + item->width > width || y + item->height > height)
 			return false;
 
@@ -53,6 +54,8 @@ namespace structures {
 	}
 
 	void Inventory::removeItem(int x, int y) {
+		// Usuwa przedmiot z siatki i zwalnia pamiêæ (w tym jego weapon/armor)
+
 		Item* item = grid[y][x];
 		if (item == nullptr) return;
 

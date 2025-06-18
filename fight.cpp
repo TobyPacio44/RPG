@@ -6,8 +6,8 @@
 namespace structures {
 
     int calculateModifiedDamage(int baseDamage) {
-        // Losujemy procent z zakresu 80 - 120
-        int percent = 80 + (rand() % 41); // 80 do 120
+        // Losowe zmodyfikowanie obra¿eñ: 80–120% bazowych
+        int percent = 80 + (rand() % 41);
         return baseDamage * percent / 100;
     }
 
@@ -17,7 +17,8 @@ namespace structures {
     }
 
     bool checkCrit() {
-        return (rand() % 100) < 10; // 10% szans
+        // Szansa trafienia (0.0–1.0)
+        return (rand() % 100) < 10;
     }
 
     bool fightRound(Character* player, Enemy* enemy) {

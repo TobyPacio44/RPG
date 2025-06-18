@@ -28,12 +28,13 @@ namespace structures {
         }
 
         float getArmorReduction(int armor) {
+            // Redukcja logarytmiczna: mocniejszy pancerz -> większa redukcja, ale zawsze min. 30%
             if (armor <= 0) return 1.0f;
-            if (armor >= 100) return 0.30f; // minimalnie 15% obrazen
+            if (armor >= 100) return 0.30f; // minimalnie 30% obrazen
 
             float logBase = log(101.0f); // maksymalny armor +1
             float reduction = 1.0f - (log((float)(armor + 1)) / logBase);
-            return reduction * 0.70f + 0.30f; // skalowanie do 15% minimalnych obrazen
+            return reduction * 0.70f + 0.30f;
         }
 
         void takeDamage(int damage) override {
@@ -77,6 +78,8 @@ namespace structures {
         }
 
         void useItemAt(int x, int y) {
+            // Obsługa różnych typów przedmiotów (potion, weapon, armor) i ich efektów
+
             auto item = inventory.getItem(x, y);
             if (!item) {
                 std::cout << "Brak przedmiotu na tej pozycji!\n";

@@ -99,6 +99,8 @@ void structures::Map::removeItemAtPlayer() {
 }
 
 void structures::Map::loadFromFile(const char* filename) {
+    // Wczytuje zawartoœæ mapy z pliku tekstowego (np. level1.txt)
+
     FILE* file;
 	errno_t err = fopen_s(&file, filename, "r");
     if (!file) {

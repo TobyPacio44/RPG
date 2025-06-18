@@ -87,7 +87,7 @@ int main() {
 
             map.removeEnemyAtPlayer();
             delete enemy;
-            std::cout << "Enemy defeated! Continue your yourney...\n";
+            std::cout << "Enemy defeated! Continue your journey...\n";
             Sleep(2500);
         }
 
