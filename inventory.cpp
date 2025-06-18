@@ -29,16 +29,17 @@ namespace structures {
 			for (int i = 0; i < width; ++i) {
 				if (canPlace(item, i, j)) {
 					addItem(item, i, j);
-					std::cout << "Przedmiot dodany do ekwipunku na pozycji: " << i << ", " << j << "\n";
+					std::cout << "Item added to inventory at: " << i << ", " << j << "\n";
 					return true;
 				}
 			}
 		}
 
-		std::cout << "Nie mozna dodac przedmiotu do ekwipunku, brak miejsca.\n";
+		std::cout << "Can't add to inventory, no space.\n";
 		delete item;
 		return false;
 	}
+
 
 	bool Inventory::addItem(Item* item, int x, int y) {
 		if (!canPlace(item, x, y)) return false;
@@ -55,6 +56,7 @@ namespace structures {
 		Item* item = grid[y][x];
 		if (item == nullptr) return;
 
+		// zerujemy wszystkie pola, ¿eby potem nie wisia³y wskaŸniki
 		for (int j = 0; j < height; ++j) {
 			for (int i = 0; i < width; ++i) {
 				if (grid[j][i] == item) {
@@ -62,6 +64,14 @@ namespace structures {
 				}
 			}
 		}
+
+		// zwalniamy pod-obiekty:
+		delete item->weapon;
+		delete item->armor;
+		// na wszelki wypadek:
+		item->weapon = nullptr;
+		item->armor = nullptr;
+
 		delete item;
 	}
 

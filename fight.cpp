@@ -35,7 +35,7 @@ namespace structures {
                 std::cout << "Trafienie krytyczne!\n";
                 damage *= 2;
             }
-            std::cout << player->name << " trafia za " << damage << " obrazen.\n";
+            //std::cout << player->name << " trafia za " << damage << " obrazen.\n";
             enemy->takeDamage(damage);
         }
         else {
@@ -52,7 +52,7 @@ namespace structures {
         // Atak przeciwnika
         std::cout << enemy->name << " atakuje...\n";
         int damage = calculateModifiedDamage(enemy->baseDamage);
-        std::cout << enemy->name << " trafia za " << damage << " obrazen.\n";
+        //std::cout << enemy->name << " trafia za " << damage << " obrazen.\n";
         player->takeDamage(damage);
 
         if (player->health <= 0) {

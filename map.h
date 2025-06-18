@@ -8,7 +8,10 @@ namespace structures {
     public:
         Map(int width = 10, int height = 10);
 
-        void print() const;
+        int playerX;
+        int playerY;
+
+        void print(int x) const;
         void placePlayer(int x, int y);
         void movePlayer(char direction);
 
@@ -16,16 +19,16 @@ namespace structures {
         void spawnItem(int x, int y);
         bool checkEnemyAtPlayer() const;
         bool checkItemAtPlayer() const;
+
         void removeEnemyAtPlayer();
         void removeItemAtPlayer();
+
+        void loadFromFile(const char* filename);
 
     private:
         int width;
         int height;
-        std::vector<std::vector<char>> grid;
-
-        int playerX;
-        int playerY;
+        std::vector<std::vector<char>> grid;       
     };
 
 }

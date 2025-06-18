@@ -2,6 +2,7 @@
 #include "item.h"
 #include <cstdlib> // rand
 #include <cstdio>  // sprintf
+#include "item_utils.h"
 
 namespace structures {
 
@@ -21,7 +22,10 @@ namespace structures {
 		Item* item = new Item;
 		item->type = ItemType::Weapon;
 		item->weapon = new Weapon(generateWeapon(level));
-		sprintf_s(item->name, "Weapon Lv%d", level);
+
+		const char* weaponName = getItemName(item);
+		sprintf_s(item->name, "%s Lv%d", weaponName, level);
+
 		item->width = 2;
 		item->height = 4;
 		item->healAmount = 0; // Brak leczenia dla broni

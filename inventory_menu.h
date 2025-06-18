@@ -21,7 +21,7 @@ namespace structures {
 			break;
 		case ItemType::Weapon:
 			std::cout << "Typ: Bron\n";
-			std::cout << "Typ Broni: " << getItemName(item) << "\n";
+			//std::cout << "Typ Broni: " << getItemName(item) << "\n";
 			std::cout << "Atak: " << item->weapon->attack << "\n";
 			std::cout << "Szansa trafienia: " << item->weapon->hitChance << "\n";
 			break;
@@ -60,13 +60,13 @@ namespace structures {
 		character->inventory.printInventory();
 
 		std::string decyzja;
-		std::cout << "(u)zyj, (i)nspekcja lub (x) wyjdz: ";
+		std::cout << "(u)se, (i)nspect, (t)hrow away lub e(x)it : ";
 		std::cin >> decyzja;
 
 		if (decyzja == "x") return;
 
 		int x, y;
-		std::cout << "Podaj wspolrzedne (x y): ";
+		std::cout << "Coordinates (x y): ";
 		std::cin >> x >> y;
 
 		if (decyzja == "u") {
@@ -79,8 +79,14 @@ namespace structures {
 			system("pause");
 			openInventoryMenu(character);
 		}
+		else if (decyzja == "t") {
+			character->inventory.removeItem(x, y);
+			std::cout << "Item thrown away.\n";
+			system("pause");
+			openInventoryMenu(character);
+		}
 		else {
-			std::cout << "Nieznana opcja.\n";
+			std::cout << "Unknown option.\n";
 			system("pause");
 			openInventoryMenu(character);
 		}

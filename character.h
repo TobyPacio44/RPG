@@ -37,24 +37,30 @@ namespace structures {
         }
 
         void takeDamage(int damage) override {
-            float reductionFactor = getArmorReduction(armor.armor);
-            int reducedDamage = (int)(damage * reductionFactor);
-            if (reducedDamage <= 0) reducedDamage = 1; // nie ujemne obrazenia
+            if (armor.durability > 0) {
+                float reductionFactor = getArmorReduction(armor.armor);
+                int reducedDamage = (int)(damage * reductionFactor);
+                if (reducedDamage <= 0) reducedDamage = 1; // nie ujemne obrazenia
 
-            // Logarytmiczne zuzycie pancerza
-            int wear = (int)(log((float)(reducedDamage + 1)) * 5);
-            armor.durability -= wear;
+                // Logarytmiczne zuzycie pancerza
+                int wear = (int)(log((float)(reducedDamage + 1)) * 3);
+                armor.durability -= wear;
 
-            if (armor.durability >= 0) {
-                std::cout << name << " takes " << reducedDamage << " damage after armor reduction!\n";
+                if (armor.durability >= 0) {
+                    std::cout << name << " takes " << reducedDamage << " damage after armor reduction!\n";
+                }
+                else {
+                    std::cout << name << "'s armor broke!\n";
+                    armor.durability = 0;
+                    armor.armor = 0;
+                }
+				Entity::takeDamage(reducedDamage);
+			}
+			else {
+				std::cout << name << " has no armor left!\n";
+				Entity::takeDamage(damage);
             }
-            else {
-                std::cout << name << "'s armor broke!\n";
-                armor.durability = 0;
-                armor.armor = 0;
-            }
 
-            Entity::takeDamage(reducedDamage);
         }
 
 
