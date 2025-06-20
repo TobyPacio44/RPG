@@ -27,6 +27,9 @@ namespace structures {
 
         void loadFromFile(const char* filename);
 
+        char getTile(int x, int y) const;
+        void setTile(int x, int y, char value);
+
     private:
         int width;
         int height;

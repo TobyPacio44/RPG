@@ -11,52 +11,95 @@
 #include "item.h"
 #include "item_generator.h"
 #include "inventory_menu.h"
+#include "save_utils.h"
+#include <cctype>
 
 using namespace structures;
 
 int main() {
     srand(time(nullptr));
 
+    Map map;
+    char filename[32];
     int floor = 1;
+    int startX = 1, startY = 1;
 
-    Character* character = new Character(Character::generateCharacter("Hero", floor));
-    character->inventory.tryAddItem(generatePotion(floor), 0, 0);
+    //Wczytaj postać
+    Character* character = loadGame(floor, map.playerX, map.playerY, &map);
+    bool loadedFromSave = character != nullptr;
+
+	//Sprawdź, czy wczytano postać z zapisu
+    if (!loadedFromSave) {
+        character = new Character(Character::generateCharacter("Hero", floor));
+        character->inventory.tryAddItem(generatePotion(floor), 0, 0);
+        sprintf_s(filename, sizeof(filename), "level%d.txt", floor);
+        map.loadFromFile(filename);
+        map.placePlayer(1, 1);
+    }
+    else {
+        map.placePlayer(map.playerX, map.playerY);
+    }
 
     bool (*fightFn)(Character*, Enemy*, void (*)(Enemy*, Character*)) = &structures::fightRound;
     void (*attackFn)(Enemy*, Character*) = &structures::regularEnemyAttack;
-    
-    Map map;
-    char filename[32];
-    sprintf_s(filename, sizeof(filename), "level%d.txt", floor);
-    map.loadFromFile(filename);
 
     system("cls");
     map.print(floor);
-    std::cout << "Move [W][A][S][D], (i)nventory, e(x)it: ";
+    std::cout << "Move [W][A][S][D], (i)nventory, sa(v)e, (r)eset, e(x)it: ";
 
+	// Główna pętla gry
     char input;
     while (true) {
         if (!_kbhit())
             continue;
-
+		// Pobierz wejście od gracza
         input = _getch();
+        input = std::tolower(input);
+
+        if (input == 'x') {
+            break;
+        }
+
+        if (input == 'r') {
+            delete character;
+            character = new Character(Character::generateCharacter("Hero", 1));
+            character->inventory.tryAddItem(generatePotion(1), 0, 0);
+
+            floor = 1;
+            map = Map();
+            map.loadFromFile("level1.txt");
+            map.placePlayer(1, 1);
+
+            saveGame(character, floor, map.playerX, map.playerY, &map);
+
+            system("cls");
+            std::cout << "Gra zresetowana!\n";
+            std::cout << "Nacisnij Enter by kontynuowac!\n";
+            Sleep(1000);
+            continue;
+        }
+
+        if (input == 'v') {
+			saveGame(character, floor, map.playerX, map.playerY, &map);
+			std::cout << "\nGame saved successfully!\n";
+			Sleep(1000);
+			continue;
+        }
+
+        if (input == 'i') {
+            openInventoryMenu(character);
+            system("cls");
+            map.print(floor);
+            std::cout << "Move [W][A][S][D], (i)nventory, sa(v)e, (r)eset, e(x)it: ";
+            continue;
+        }
 
         map.movePlayer(input);
 
         system("cls");
         map.print(floor);
 
-        std::cout << "Move [W][A][S][D], (i)nventory, e(x)it:";
-
-        if (input == 'x') break;
-
-        if (input == 'i') {
-            openInventoryMenu(character);
-            system("cls");
-            map.print(floor);
-            std::cout << "Move [W][A][S][D], (i)nventory, e(x)it: ";
-            continue;
-        }
+        std::cout << "Move [W][A][S][D], (i)nventory, sa(v)e, (r)eset, e(x)it: ";
 
 
         // Przejście na kolejny poziom
@@ -120,7 +163,7 @@ int main() {
                 delete item;
             }
             map.removeItemAtPlayer();
-            Sleep(2500);
+            Sleep(1000);
         }
     }
 

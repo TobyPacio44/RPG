@@ -146,6 +146,7 @@
     <ClInclude Include="item_generator.h" />
     <ClInclude Include="item_utils.h" />
     <ClInclude Include="map.h" />
+    <ClInclude Include="save_utils.h" />
     <ClInclude Include="weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -25,6 +25,7 @@ void structures::Map::print(int floor) const {
     }
 }
 
+
 void structures::Map::placePlayer(int x, int y) {
     if (x >= 0 && x < width && y >= 0 && y < height) {
         playerX = x;
@@ -112,6 +113,13 @@ void structures::Map::moveEnemies() {
     }
 }
 
+char structures::Map::getTile(int x, int y) const {
+    return grid[y][x];
+}
+
+void structures::Map::setTile(int x, int y, char value) {
+    grid[y][x] = value;
+}
 
 void structures::Map::spawnItem(int x, int y) {
     if (x >= 0 && x < width && y >= 0 && y < height && grid[y][x] == '.') {

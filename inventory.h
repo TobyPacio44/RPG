@@ -8,6 +8,7 @@ namespace structures {
 		
 	class Inventory {
 	public:
+		//Jeœli wywo³amy Inventory() bez parametrów, to stworzy siê 10x10
 		Inventory(int width = 10, int height = 10);
 
 		bool addItem(Item* item, int x, int y);
